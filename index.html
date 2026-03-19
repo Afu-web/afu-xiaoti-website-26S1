@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afu & XiaoTi | Linktree & Gallery</title>
+    <!-- Fonts: Inter (modern), Noto Serif TC (ancient/elegant) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-afu transition-theme">
+    <div class="background-decor overlay"></div>
+    <header class="top-bar">
+        <nav class="main-nav">
+            <button class="nav-btn active" data-tab="afu" data-i18n="tab_afu_gallery">阿福<br>AFU</button>
+            <button class="nav-btn" data-tab="xiaoti" data-i18n="tab_xiaoti_gallery">曉禔<br>XiaoTi</button>
+            <button class="nav-btn" data-tab="photos" data-i18n="tab_photos_gallery">攝影作品</button>
+        </nav>
+        <button id="lang-toggle" class="lang-btn" data-i18n="toggle_lang">English</button>
+    </header>
+
+    <main>
+
+        <!-- Profile Section -->
+        <section class="profile-section fade-el">
+            <div class="avatar-container" id="avatar-container">
+                <img src="images/afu/avatar.jpg" alt="Avatar" id="profile-avatar" class="avatar default-avatar">
+            </div>
+            
+            <h1 id="profile-name" class="profile-name" data-i18n="name_afu">阿福 Afu</h1>
+            <p id="profile-desc" class="profile-desc" data-i18n="desc_afu">願望之光化作絢麗的映象<br>夢想與現實交織成永恆的旋律</p>
+            
+            <!-- Linktree Links -->
+            <div class="links-container">
+                <a href="https://www.facebook.com/23weif" target="_blank" class="link-btn fb-afu show-in-afu">
+                    <img src="images/logo/FB.png" alt="Facebook" class="link-icon"> 
+                    <span data-i18n="btn_fb_afu">Facebook (Afu Huli)</span>
+                </a>
+                <a href="https://www.facebook.com/25XiaoTi" target="_blank" class="link-btn fb-xiaoti show-in-xiaoti">
+                    <img src="images/logo/FB.png" alt="Facebook" class="link-icon"> 
+                    <span data-i18n="btn_fb_xiaoti">Facebook (曉禔)</span>
+                </a>
+                <a href="https://x.com/AfuPt_" target="_blank" class="link-btn twitter show-in-both">
+                    <img src="images/logo/X.png" alt="X/Twitter" class="link-icon"> 
+                    <span data-i18n="btn_twitter">Twitter (X)</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section fade-el">
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Images will be injected here via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox-credit" class="lightbox-credit"></div>
+    </div>
+
+    <footer class="site-footer">
+        © 2026 Afu Huli. All rights reserved.
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
