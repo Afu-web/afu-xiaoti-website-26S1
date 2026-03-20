@@ -12,8 +12,8 @@ body.theme-afu {
     --accent-hover: #a16207;
     --btn-bg: rgba(255, 255, 255, 0.8);
     --btn-border: rgba(202, 138, 4, 0.3); /* yellow border */
-    --font-heading: 'Inter', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Inter', 'Noto Sans TC', 'Noto Sans SC', sans-serif;
+    --font-body: 'Inter', 'Noto Sans TC', 'Noto Sans SC', sans-serif;
     --box-shadow: 0 4px 20px rgba(202, 138, 4, 0.15);
     --card-bg: rgba(255, 255, 255, 0.95);
     --border-radius: 12px;
@@ -27,8 +27,8 @@ body.theme-xiaoti {
     --accent-hover: #b56b6f;
     --btn-bg: rgba(255, 255, 255, 0.7);
     --btn-border: rgba(229, 152, 155, 0.4);
-    --font-heading: 'Noto Serif TC', serif;
-    --font-body: 'Noto Serif TC', serif;
+    --font-heading: 'Noto Serif TC', 'Noto Serif SC', serif;
+    --font-body: 'Noto Serif TC', 'Noto Serif SC', serif;
     --box-shadow: 0 4px 20px rgba(229, 152, 155, 0.2);
     --card-bg: rgba(253, 251, 247, 0.85);
     --border-radius: 20px;
@@ -42,8 +42,8 @@ body.theme-photos {
     --accent-hover: #ffffff;
     --btn-bg: rgba(255, 255, 255, 0.05);
     --btn-border: rgba(255, 255, 255, 0.1);
-    --font-heading: 'Inter', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Inter', 'Noto Sans TC', 'Noto Sans SC', sans-serif;
+    --font-body: 'Inter', 'Noto Sans TC', 'Noto Sans SC', sans-serif;
     --box-shadow: 0 4px 20px rgba(0,0,0,0.8);
     --card-bg: rgba(18, 18, 18, 0.8);
     --border-radius: 8px;
