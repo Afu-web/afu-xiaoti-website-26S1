@@ -71,7 +71,7 @@ h1, h2, h3, .profile-name, .nav-btn {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: -1;
-    transition: opacity var(--transition-speed) var(--ease-out), background-image var(--transition-speed) var(--ease-out);
+    transition: opacity var(--transition-speed) var(--ease-out);
     pointer-events: none;
 }
 
@@ -130,7 +130,8 @@ main {
     padding: 6px;
     border-radius: 30px;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     transition: background 0.4s ease;
 }
 body.theme-afu .main-nav { background: rgba(255,255,255,0.03); }
@@ -171,8 +172,6 @@ body.theme-photos .main-nav { background: rgba(255,255,255,0.04); }
     font-family: inherit;
     font-weight: 600;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
 }
 .lang-btn:hover {
     border-color: var(--accent);
@@ -248,8 +247,6 @@ body.theme-photos .main-nav { background: rgba(255,255,255,0.04); }
     text-decoration: none;
     font-weight: 600;
     font-size: 1.05rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease, border-radius var(--transition-speed) ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
 }
@@ -307,10 +304,37 @@ body.theme-afu .show-in-both, body.theme-xiaoti .show-in-both { display: flex; a
     top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: cover;
+    transform: translateZ(0); /* Hardware acceleration */
     transition: transform 0.6s var(--ease-out);
 }
 .gallery-item:hover img {
-    transform: scale(1.15);
+    transform: scale(1.1);
+}
+
+.bottom-action-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.large-action-btn {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 30px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px dashed var(--btn-border);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+}
+.large-action-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+    background: rgba(0,0,0,0.02);
 }
 
 .empty-gallery-msg {
