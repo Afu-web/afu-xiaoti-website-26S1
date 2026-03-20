@@ -66,7 +66,7 @@ const i18n = {
 
         "btn_fb_afu": "Facebook (Afu Huli)",
         "btn_fb_xiaoti": "Facebook (曉禔)",
-        "btn_twitter": "Twitter (X)",
+        "btn_twitter": "X (@AfuPt_)",
 
         "gallery_empty": "相簿建置中 📭"
     },
@@ -88,7 +88,7 @@ const i18n = {
 
         "btn_fb_afu": "Facebook (Afu Huli)",
         "btn_fb_xiaoti": "Facebook (XiaoTi)",
-        "btn_twitter": "Twitter (X)",
+        "btn_twitter": "X (@AfuPt_)",
 
         "gallery_empty": "Gallery is empty 📭"
     }
@@ -237,7 +237,7 @@ function renderGallery() {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.4s ease';
 
-        img.onload = function() {
+        img.onload = function () {
             this.style.opacity = '1';
         }
 
@@ -253,7 +253,7 @@ function renderGallery() {
         if (img.complete) {
             img.style.opacity = '1';
         }
-        
+
         // Optimizations for photo loading speeds
         if (index < 4) {
             img.loading = 'eager';
