@@ -143,92 +143,64 @@ function handleLangChange() {
 
 function switchMode(newMode) {
     if (newMode === currentTab) return;
-    currentTab = newMode;
 
-    // Switch active button
+    // Switch active button immediately for visual feedback
     navBtns.forEach(btn => {
-        if (btn.dataset.tab === currentTab) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+        btn.classList.toggle('active', btn.dataset.tab === newMode);
     });
 
-    // Change body theme class
-    body.className = `theme-${currentTab} transition-theme`;
-
-    updateUIContent();
-
-    // Add fade out animation to gallery
-    const gallerySection = document.querySelector('.gallery-section');
-    gallerySection.classList.add('fade-out');
+    // Fade out main content
+    const mainContent = document.querySelector('main');
+    mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    mainContent.style.opacity = '0';
+    mainContent.style.transform = 'translateY(10px)';
 
     setTimeout(() => {
+        currentTab = newMode;
+        // Apply theme variables
+        body.className = `theme-${currentTab} transition-theme`;
+
+        // Update content synchronously while hidden
+        updateUIContent(true);
         renderGallery();
-        gallerySection.classList.remove('fade-out');
-    }, 400); // 400ms matches CSS transition
+
+        // Fade in main content
+        setTimeout(() => {
+            mainContent.style.opacity = '1';
+            mainContent.style.transform = 'translateY(0)';
+        }, 50); // slight delay to ensure DOM is ready
+    }, 300);
 }
 
 function updateUIContent(skipAnim = false) {
     const t = i18n[currentLang];
     const elementsToUpdate = document.querySelectorAll('[data-i18n]');
 
-    // Update avatar based on mode
-    const expectedAvatarSrc = `images/${currentTab}/avatar.jpg`;
-
-    const imgTest = new Image();
-    imgTest.onload = () => {
-        avatarImg.src = expectedAvatarSrc;
+    // Update avatar container synchronously
+    if (currentTab === 'photos') {
+        avatarContainer.style.display = 'none';
+    } else {
+        avatarImg.src = `images/${currentTab}/avatar.jpg`;
         avatarContainer.style.display = 'block';
-    };
-    imgTest.onerror = () => {
-        // Hide avatar container if the specific mode has no avatar (like photography)
-        if (currentTab === 'photos') {
-            avatarContainer.style.display = 'none';
-        } else {
-            avatarImg.src = `images/demo_${currentTab}_avatar.webp`;
-            avatarContainer.style.display = 'block';
-        }
-    };
-    imgTest.src = expectedAvatarSrc;
-
-    if (skipAnim) {
-        elementsToUpdate.forEach(el => {
-            const key = el.dataset.i18n;
-            // Name and Desc uses currentTab prefix replacement dynamically
-            if (key.startsWith('name_') || key.startsWith('desc_')) {
-                const isName = el.classList.contains('profile-name');
-                const actualKey = isName ? `name_${currentTab}` : `desc_${currentTab}`;
-                el.innerHTML = t[actualKey];
-            } else {
-                el.innerHTML = t[key];
-            }
-
-            // Re-assign nav button labels cleanly
-            if (el.classList.contains('nav-btn')) {
-                el.innerHTML = t[key];
-            }
-        });
-        return;
     }
 
-    // Fade animation logic
-    const profileSection = document.querySelector('.profile-section');
-    profileSection.classList.add('fade-out');
+    // Update text
+    elementsToUpdate.forEach(el => {
+        const key = el.dataset.i18n;
+        // Name and Desc uses currentTab prefix replacement dynamically
+        if (key.startsWith('name_') || key.startsWith('desc_')) {
+            const isName = el.classList.contains('profile-name');
+            const actualKey = isName ? `name_${currentTab}` : `desc_${currentTab}`;
+            el.innerHTML = t[actualKey] || '';
+        } else {
+            el.innerHTML = t[key];
+        }
 
-    setTimeout(() => {
-        elementsToUpdate.forEach(el => {
-            const key = el.dataset.i18n;
-            if (key.startsWith('name_') || key.startsWith('desc_')) {
-                const isName = el.classList.contains('profile-name');
-                const actualKey = isName ? `name_${currentTab}` : `desc_${currentTab}`;
-                el.innerHTML = t[actualKey];
-            } else {
-                el.innerHTML = t[key];
-            }
-        });
-        profileSection.classList.remove('fade-out');
-    }, 400);
+        // Re-assign nav button labels cleanly
+        if (el.classList.contains('nav-btn')) {
+            el.innerHTML = t[key];
+        }
+    });
 }
 
 function renderGallery() {
@@ -261,15 +233,35 @@ function renderGallery() {
 
         const img = document.createElement('img');
 
+        // Initial state for smooth image loading
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.4s ease';
+
+        img.onload = function() {
+            this.style.opacity = '1';
+        }
+
         // Error handling for missing local files
         img.onerror = function () {
             this.onerror = null;
             this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23ddd"/><text x="50" y="50" font-family="Arial" font-size="14" fill="%23888" text-anchor="middle" dominant-baseline="middle">Image Not Found</text></svg>';
+            this.style.opacity = '1';
         };
 
         img.src = src;
         img.alt = `Gallery ${currentTab}`;
-        img.loading = 'lazy';
+        if (img.complete) {
+            img.style.opacity = '1';
+        }
+        
+        // Optimizations for photo loading speeds
+        if (index < 4) {
+            img.loading = 'eager';
+            img.fetchPriority = 'high';
+        } else {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+        }
 
         div.onclick = () => openLightbox(img.src, `${currentTab}/${filename}`);
         div.appendChild(img);
