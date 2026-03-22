@@ -413,11 +413,42 @@ body.theme-afu .show-in-both, body.theme-xiaoti .show-in-both { display: flex; a
 .site-footer {
     width: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 30px 20px;
     font-size: 0.85rem;
     color: var(--text-secondary);
-    opacity: 0.8;
-    margin-top: auto; /* Push to bottom if container grows */
+    opacity: 0.9;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.visitor-counter {
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.visitor-counter:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+}
+
+#visitor-count {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
 }
 
 /* --- Animations --- */

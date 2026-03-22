@@ -68,7 +68,8 @@ const i18n = {
         "btn_fb_xiaoti": "Facebook (曉禔)",
         "btn_twitter": "X (@AfuPt_)",
 
-        "gallery_empty": "相簿建置中 📭"
+        "gallery_empty": "相簿建置中 📭",
+        "visitor_count": "總瀏覽人次"
     },
     "en": {
         "toggle_lang": "繁體中文",
@@ -90,7 +91,8 @@ const i18n = {
         "btn_fb_xiaoti": "Facebook (XiaoTi)",
         "btn_twitter": "X (@AfuPt_)",
 
-        "gallery_empty": "Gallery is empty 📭"
+        "gallery_empty": "Gallery is empty 📭",
+        "visitor_count": "Total Visitors"
     }
 };
 
@@ -133,6 +135,25 @@ function init() {
     // Run initial renders (skip fade animation on load)
     updateUIContent(true);
     renderGallery();
+    updateVisitorCount();
+}
+
+async function updateVisitorCount() {
+    const counterEl = document.getElementById('visitor-count');
+    try {
+        // 使用 CountAPI (namespace: afu-xiaoti, key: visits)
+        // 注意：如果 API 暫時無法連線，我們會顯示一個預設文字
+        const response = await fetch('https://api.countapi.xyz/hit/afu-xiaoti-website/visits');
+        if (response.ok) {
+            const data = await response.json();
+            counterEl.textContent = data.value.toLocaleString();
+        } else {
+            counterEl.textContent = '---';
+        }
+    } catch (error) {
+        console.error('Visitor counter error:', error);
+        counterEl.textContent = '---';
+    }
 }
 
 function handleLangChange() {
